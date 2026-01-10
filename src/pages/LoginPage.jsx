@@ -11,7 +11,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ minHeight: '110vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{
                 width: '100%',
                 maxWidth: '400px',
@@ -23,7 +23,7 @@ const LoginPage = () => {
                 <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Welcome to Sportfolio</h2>
 
                 <form onSubmit={handleLogin}>
-                    <div style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ marginBottom: '2.5rem' }}>
                         <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>I am a...</label>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.5rem' }}>
                             <button
@@ -35,7 +35,9 @@ const LoginPage = () => {
                                     border: role === 'athlete' ? '1px solid var(--accent-primary)' : '1px solid var(--border-color)',
                                     background: role === 'athlete' ? 'var(--accent-glow)' : 'transparent',
                                     color: 'var(--text-primary)',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
+                                    fontWeight: '500',
+                                    fontSize: '0.9rem'
                                 }}
                             >
                                 Athlete
@@ -49,7 +51,9 @@ const LoginPage = () => {
                                     border: role === 'coach' ? '1px solid var(--accent-primary)' : '1px solid var(--border-color)',
                                     background: role === 'coach' ? 'var(--accent-glow)' : 'transparent',
                                     color: 'var(--text-primary)',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
+                                    fontWeight: '500',
+                                    fontSize: '0.9rem'
                                 }}
                             >
                                 Coach
@@ -63,10 +67,12 @@ const LoginPage = () => {
                                     border: role === 'org' ? '1px solid var(--accent-primary)' : '1px solid var(--border-color)',
                                     background: role === 'org' ? 'var(--accent-glow)' : 'transparent',
                                     color: 'var(--text-primary)',
+                                    fontWeight: '500',
+                                    fontSize: '0.9rem',
                                     cursor: 'pointer'
                                 }}
                             >
-                                Org
+                                Organization
                             </button>
                         </div>
                     </div>
