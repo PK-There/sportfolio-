@@ -35,9 +35,8 @@ const DashboardLayout = ({ theme, toggleTheme }) => {
                     <div className="logo">
                         Sport<span className="accent-dot">folio</span>
                     </div>
-                    <LanguageSelector />
                 </div>
-
+                
                 <nav style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <NavLink
                         to={dashboardLink.path}
@@ -51,8 +50,9 @@ const DashboardLayout = ({ theme, toggleTheme }) => {
                     >
                         {dashboardLink.label}
                     </NavLink>
+                    <LanguageSelector />
                 </nav>
-
+                <div style={{ height: '1rem' }}></div> {/* Space between language selector and logout */}
                 <div style={{ marginTop: 'auto' }}>
                     <button 
                         onClick={handleLogout} 

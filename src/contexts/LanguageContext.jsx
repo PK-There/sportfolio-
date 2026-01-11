@@ -102,6 +102,28 @@ const translations = {
     // About Page
     builtForPrivacy: 'Built for Privacy.',
     poweredByProgress: 'Powered by Progress.',
+    
+    // Landing Page
+    theProblemWithSports: 'The Problem with Sports Today',
+    talentIsEverywhere: 'Talent is everywhere, but opportunity is not. Fragmented information, lack of visibility, and limited access to resources hold back millions of athletes.',
+    readyToStartJourney: 'Ready to Start Your Journey?',
+    joinEcosystem: 'Join the ecosystem that powers Indian sports.',
+    getStartedNow: 'Get Started Now',
+    
+    // Hero Section
+    oneNation: 'One Nation.',
+    oneAthletePlatform: 'One Athlete Platform.',
+    centralEcosystem: 'The central ecosystem for opportunity discovery, athlete development, and fair visibility in Indian sports.',
+    getStarted: 'Get Started',
+    howItWorks: 'How It Works',
+    
+    // Features Section
+    centralizedDiscovery: 'Centralized Discovery',
+    onePlatformForSchemes: 'One platform for government schemes, private scholarships, and selection trials.',
+    structuredProfiles: 'Structured Profiles',
+    noSocialNoise: 'No social noise. Just verified stats, achievements, and readiness data.',
+    fairVisibility: 'Fair Visibility',
+    getRecognizedByMerit: 'Get recognized by coaches and organizations based on merit, not followers.',
   },
   hi: {
     // Navigation
@@ -204,6 +226,28 @@ const translations = {
     // About Page
     builtForPrivacy: 'गोपनीयता के लिए निर्मित।',
     poweredByProgress: 'प्रगति द्वारा संचालित।',
+    
+    // Landing Page
+    theProblemWithSports: 'आज के खेल में समस्या',
+    talentIsEverywhere: 'प्रतिभा हर जगह है, लेकिन अवसर नहीं है। टूटी हुई जानकारी, दृश्यता की कमी और संसाधनों तक सीमित पहुंच लाखों एथलीट्स को पीछे रखती है।',
+    readyToStartJourney: 'अपनी यात्रा शुरू करने के लिए तैयार हैं?',
+    joinEcosystem: 'भारतीय खेल को संचालित करने वाले पारिस्थितिकी तंत्र में शामिल हों।',
+    getStartedNow: 'अभी शुरू करें',
+    
+    // Hero Section
+    oneNation: 'एक राष्ट्र।',
+    oneAthletePlatform: 'एक एथलीट मंच।',
+    centralEcosystem: 'भारतीय खेल में अवसर खोज, एथलीट विकास, और निष्पक्ष दृश्यता के लिए केंद्रीय पारिस्थितिकी तंत्र।',
+    getStarted: 'शुरू करें',
+    howItWorks: 'यह कैसे काम करता है',
+    
+    // Features Section
+    centralizedDiscovery: 'केंद्रीकृत खोज',
+    onePlatformForSchemes: 'सरकारी योजनाओं, निजी छात्रवृत्ति और चयन परीक्षण के लिए एक मंच।',
+    structuredProfiles: 'संरचित प्रोफाइल',
+    noSocialNoise: 'कोई सामाजिक शोर नहीं। केवल सत्यापित आंकड़े, उपलब्धियां और तैयारी का डेटा।',
+    fairVisibility: 'निष्पक्ष दृश्यता',
+    getRecognizedByMerit: 'योग्यता के आधार पर कोच और संगठनों द्वारा पहचाने जाएं, अनुयायियों के आधार पर नहीं।',
   },
   mr: {
     // Navigation
@@ -306,6 +350,28 @@ const translations = {
     // About Page
     builtForPrivacy: 'गोपनीयतेसाठी निर्माण केलेले.',
     poweredByProgress: 'प्रगतीने समर्थित.',
+    
+    // Landing Page
+    theProblemWithSports: 'आजच्या खेळात समस्या',
+    talentIsEverywhere: 'प्रतिभा सर्वत्र आहे, पण संधी नाही. तुटलेली माहिती, दृश्यतेची कमतरता आणि संसाधनांपर्यंत मर्यादित प्रवेश यामुळे दर्जनो खेळाडू मागे राहतात.',
+    readyToStartJourney: 'तुमची प्रवास सुरू करण्यास तयार आहात?',
+    joinEcosystem: 'भारतीय खेळाला सूत्रसंचालित करणाऱ्या पारिस्थितिकीतंत्रात सामील व्हा.',
+    getStartedNow: 'आता सुरु करा',
+    
+    // Hero Section
+    oneNation: 'एक राष्ट्र.',
+    oneAthletePlatform: 'एक एथलीट प्लॅटफॉर्म.',
+    centralEcosystem: 'भारतीय खेळातील संधी शोध, खेळाडू विकास आणि निष्पक्ष दृश्यता साठी केंद्रीय पारिस्थितिकीतंत्र.',
+    getStarted: 'सुरु करा',
+    howItWorks: 'हे कसे काम करते',
+    
+    // Features Section
+    centralizedDiscovery: 'केंद्रित शोध',
+    onePlatformForSchemes: 'सरकारी योजना, खाजगी शिष्यवृत्ती आणि निवड परीक्षणांसाठी एकच प्लॅटफॉर्म.',
+    structuredProfiles: 'संरचित प्रोफाइल',
+    noSocialNoise: 'सामाजिक गोंधळ नाही. फक्त सत्यापित आकडेवारी, उपलब्धी आणि तयारीचा डेटा.',
+    fairVisibility: 'निष्पक्ष दृश्यता',
+    getRecognizedByMerit: 'कोच आणि संस्थांद्वारे योग्यतेनुसार ओळखले जा, अनुयायांनुसार नाही.',
   }
 };
 

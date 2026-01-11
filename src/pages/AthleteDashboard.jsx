@@ -159,7 +159,7 @@ For personalized advice, please consider consulting with a professional in your 
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                     <button className="btn-secondary" onClick={() => setIsProfileOpen(true)}>✏️ {t('editProfile')}</button>
-                    <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} onClick={() => setActiveTab('ai-insights')}>
                         <span>🤖</span> {t('aiAssistant')}
                     </button>
                 </div>

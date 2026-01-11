@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const DiscoveryIcon = () => (
     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style={{ margin: '0 auto 1.5rem', display: 'block' }}>
@@ -108,22 +109,23 @@ const VisibilityIcon = () => (
 );
 
 const Features = () => {
+    const { t } = useLanguage();
     return (
         <section id="features" className="features-grid">
             <div className="feature-card">
                 <DiscoveryIcon />
-                <h3>Centralized Discovery</h3>
-                <p>One platform for government schemes, private scholarships, and selection trials.</p>
+                <h3>{t('centralizedDiscovery')}</h3>
+                <p>{t('onePlatformForSchemes') || 'One platform for government schemes, private scholarships, and selection trials.'}</p>
             </div>
             <div className="feature-card">
                 <ProfileIcon />
-                <h3>Structured Profiles</h3>
-                <p>No social noise. Just verified stats, achievements, and readiness data.</p>
+                <h3>{t('structuredProfiles')}</h3>
+                <p>{t('noSocialNoise') || 'No social noise. Just verified stats, achievements, and readiness data.'}</p>
             </div>
             <div className="feature-card">
                 <VisibilityIcon />
-                <h3>Fair Visibility</h3>
-                <p>Get recognized by coaches and organizations based on merit, not followers.</p>
+                <h3>{t('fairVisibility')}</h3>
+                <p>{t('getRecognizedByMerit') || 'Get recognized by coaches and organizations based on merit, not followers.'}</p>
             </div>
         </section>
     );

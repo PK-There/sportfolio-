@@ -11,10 +11,9 @@ const LandingPage = () => {
             <Hero />
             <section className="problem-statement" style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: 'var(--bg-secondary)' }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800' }}>The Problem with Sports Today</h2>
+                    <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '800' }}>{t('theProblemWithSports') || 'The Problem with Sports Today'}</h2>
                     <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
-                        Talent is everywhere, but opportunity is not.
-                        Fragmented information, lack of visibility, and limited access to resources hold back millions of athletes.
+                        {t('talentIsEverywhere') || 'Talent is everywhere, but opportunity is not. Fragmented information, lack of visibility, and limited access to resources hold back millions of athletes.'}
                     </p>
                 </div>
             </section>
@@ -22,11 +21,11 @@ const LandingPage = () => {
             <Features />
 
             <section className="cta-section" style={{ padding: '6rem 2rem', textAlign: 'center' }}>
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: '800' }}>Ready to Start Your Journey?</h2>
+                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: '800' }}>{t('readyToStartJourney') || 'Ready to Start Your Journey?'}</h2>
                 <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                    Join the ecosystem that powers Indian sports.
+                    {t('joinEcosystem') || 'Join the ecosystem that powers Indian sports.'}
                 </p>
-                <Link to="/get-started" className="btn-primary big">Get Started Now</Link>
+                <Link to="/get-started" className="btn-primary big">{t('getStartedNow') || 'Get Started Now'}</Link>
             </section>
         </div>
     );

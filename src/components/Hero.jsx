@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const BatsmanIcon = () => (
     <div className="hero-graphic left" style={{ position: 'absolute', left: '0', top: '55%', transform: 'translateY(-50%)', opacity: 0.6, zIndex: 1, pointerEvents: 'none' }}>
@@ -86,16 +87,17 @@ const FootballerIcon = () => (
 );
 
 const Hero = () => {
+    const { t } = useLanguage();
     return (
         <section className="hero" style={{ overflow: 'hidden' }}> {/* Prevent scrollbars from graphics */}
             <BatsmanIcon />
             <FootballerIcon />
             <div className="hero-content">
-                <h1>One Nation. <br /><span className="text-gradient">One Athlete Platform.</span></h1>
-                <p className="hero-sub">The central ecosystem for opportunity discovery, athlete development, and fair visibility in Indian sports.</p>
+                <h1>{t('oneNation')}<br /><span className="text-gradient">{t('oneAthletePlatform')}</span></h1>
+                <p className="hero-sub">{t('centralEcosystem') || 'The central ecosystem for opportunity discovery, athlete development, and fair visibility in Indian sports.'}</p>
                 <div className="cta-group">
-                    <Link to="/get-started" className="btn-primary big">Get Started</Link>
-                    <Link to="/about" className="btn-secondary big">How It Works</Link>
+                    <Link to="/get-started" className="btn-primary big">{t('getStarted') || 'Get Started'}</Link>
+                    <Link to="/about" className="btn-secondary big">{t('howItWorks') || 'How It Works'}</Link>
                 </div>
             </div>
             <div className="hero-background-glow"></div>
