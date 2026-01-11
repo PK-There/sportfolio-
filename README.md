@@ -1,87 +1,80 @@
-Sportfolio
-
+# Sportfolio  
 AI-Powered Athlete Discovery & Performance Analysis Platform
 
 Sportfolio is a full-stack web platform designed to bridge the visibility gap for grassroots athletes by leveraging artificial intelligence, secure authentication, and modern web technologies. The platform enables athletes to showcase their profiles, receive AI-driven performance feedback, and connect with coaches, scouts, and sponsors in a scalable and inclusive manner.
 
-Problem Statement
+---
+
+## Problem Statement
 
 A large number of talented athletes, particularly from underrepresented and rural regions, lack access to:
-
-Professional scouting networks
-
-Objective performance evaluation
-
-Visibility beyond local competitions
-
-Affordable coaching and feedback mechanisms
+- Professional scouting networks
+- Objective performance evaluation
+- Visibility beyond local competitions
+- Affordable coaching and feedback mechanisms
 
 Traditional talent identification systems are limited by geography, cost, and subjective assessment, resulting in missed opportunities for deserving athletes.
 
-Solution Overview
+---
+
+## Solution Overview
 
 Sportfolio provides a centralized, AI-driven platform that allows athletes to:
+- Create verified digital profiles
+- Upload images and videos for performance analysis
+- Receive structured feedback on posture and technique
+- Access the platform in multiple languages
+- Gain visibility among coaches, scouts, and sponsors
 
-Create verified digital profiles
+The system is built with a focus on accessibility, scalability, and real-world applicability under the theme of **AI for Societal Good**.
 
-Upload images and videos for performance analysis
+---
 
-Receive structured feedback on posture and technique
+## Key Features
 
-Access the platform in multiple languages
+- **AI-Based Performance Analysis**  
+  Computer vision–assisted feedback on posture, movement, and technique from uploaded media.
 
-Gain visibility among coaches, scouts, and sponsors
+- **Athlete Portfolio Management**  
+  Centralized profiles including achievements, statistics, and performance media.
 
-The system is built with a focus on accessibility, scalability, and real-world applicability under the theme of AI for Societal Good.
+- **Multilingual & Voice Support**  
+  Text-to-speech and language accessibility for broader inclusion.
 
-Key Features
+- **Secure Authentication**  
+  Firebase Authentication with backend token verification.
 
-AI-Based Performance Analysis
-Computer vision–assisted feedback on posture, movement, and technique from uploaded media.
+- **Scouting & Discovery Tools**  
+  Structured data access for coaches and scouts to discover talent efficiently.
 
-Athlete Portfolio Management
-Centralized profiles including achievements, statistics, and performance media.
+- **Modern User Interface**  
+  Responsive design with dark/light mode support.
 
-Multilingual & Voice Support
-Text-to-speech and language accessibility for broader inclusion.
+---
 
-Secure Authentication
-Firebase Authentication with backend token verification.
+## Technology Stack
 
-Scouting & Discovery Tools
-Structured data access for coaches and scouts to discover talent efficiently.
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- JavaScript (ES6+)
 
-Modern User Interface
-Responsive design with dark/light mode support.
+### Backend
+- Node.js
+- Express.js
+- Firebase Admin SDK
+- MongoDB Atlas
 
-Technology Stack
-Frontend
+### AI & Supporting Tools
+- Computer Vision for posture and technique analysis
+- Text-to-Speech (gTTS)
+- Multilingual support pipelines
 
-React (Vite)
+---
 
-Tailwind CSS
+## Project Architecture
 
-JavaScript (ES6+)
-
-Backend
-
-Node.js
-
-Express.js
-
-Firebase Admin SDK
-
-MongoDB Atlas
-
-AI & Supporting Tools
-
-Computer Vision for posture and technique analysis
-
-Text-to-Speech (gTTS)
-
-Multilingual support pipelines
-
-Project Architecture (High Level)
+```text
 Frontend (React + Vite)
         |
         |  Firebase ID Token
@@ -91,66 +84,3 @@ Backend (Node.js + Express)
         |  Verified Requests
         v
 MongoDB Atlas
-
-Getting Started
-Prerequisites
-
-Node.js (v18 or higher recommended)
-
-npm or yarn
-
-Installation
-git clone https://github.com/your-username/sportfolio.git
-cd sportfolio
-npm install
-
-Running the Development Server
-npm run dev
-
-
-The application will be available at:
-
-http://localhost:5173
-
-Environment Variables
-
-Sensitive credentials (Firebase Admin keys, database URIs) should be stored securely and never committed to version control.
-
-Example:
-
-MONGODB_URI=your_mongodb_uri
-FIREBASE_SERVICE_ACCOUNT=path_to_service_account.json
-
-Impact & Use Cases
-
-Grassroots athlete empowerment
-
-Fair and data-driven talent discovery
-
-Increased accessibility through multilingual support
-
-Reduction of geographical and economic barriers in sports scouting
-
-Future Scope
-
-Advanced pose estimation across multiple joints
-
-Real-time video feedback
-
-Mobile application support
-
-Integration with sports federations and training academies
-
-Analytics dashboards for scouts and organizations
-
-Team
-
-Prathamesh Khaire — Full-Stack Development & AI Integration
-
-License
-
-This project is licensed under the MIT License.
-
-Notes for Reviewers
-
-Sportfolio is designed with a production mindset, focusing on scalability, security, and societal impact. The platform demonstrates the practical application of AI in addressing real-world challenges within the sports ecosystem.
