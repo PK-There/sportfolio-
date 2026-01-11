@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const RoleSelectionPage = () => {
     const navigate = useNavigate();
+    const { currentUser } = useAuth();
+    
+    useEffect(() => {
+        // If user is already logged in and has a role, redirect to dashboard
+        const userRole = localStorage.getItem('userRole');
+        if (currentUser && userRole) {
+            navigate(`/dashboard/${userRole}`);
+        }
+    }, [currentUser, navigate]);
 
     const handleRoleLogin = (role) => {
         // Scroll to top first
