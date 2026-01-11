@@ -107,29 +107,29 @@ http://localhost:5173
 
 Impact & Use Cases
 
--Grassroots athlete empowerment
--Fair and data-driven talent discovery
--Increased accessibility through multilingual support
--Reduction of geographical and economic barriers in sports scouting
+- Grassroots athlete empowerment
+- Fair and data-driven talent discovery
+- Increased accessibility through multilingual support
+- Reduction of geographical and economic barriers in sports scouting
 
 ---
 
 Future Scope
 
--Advanced pose estimation across multiple joints
--Real-time video-based feedback
--Mobile application support
--Integration with sports federations and training academies
--Analytics dashboards for scouts and organizations
+- Advanced pose estimation across multiple joints
+- Real-time video-based feedback
+- Mobile application support
+- Integration with sports federations and training academies
+- Analytics dashboards for scouts and organizations
 
 ---
 
 Team
 
--Prathamesh Khaire — Full Stack Development & AI Integration
--Osman Sanjar - Database Integration 
--Parth Kumar Jat - UI Design 
--Sanskriti Singh - Frontend 
+- Prathamesh Khaire — Full Stack Development & AI Integration
+- Osman Sanjar - Database Integration 
+- Parth Kumar Jat - UI Design 
+- Sanskriti Singh - Frontend 
 
 ---
 
