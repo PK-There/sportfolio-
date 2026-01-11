@@ -10,13 +10,14 @@ const DashboardLayout = ({ theme, toggleTheme }) => {
     const userRole = localStorage.getItem('userRole');
     
     useEffect(() => {
-        // If user is not authenticated or doesn't have a role, redirect to login
+        // If user is not authenticated, redirect to login
         if (!currentUser && !loading) {
             navigate('/login');
-        } else if (currentUser && !userRole) {
+        } else if (currentUser && !userRole && !loading) {
             // User is logged in but doesn't have a role set, redirect to role selection
             navigate('/get-started');
         }
+        // Don't redirect while loading is in progress
     }, [currentUser, userRole, loading, navigate]);
 
     const handleLogout = () => {

@@ -26,19 +26,37 @@ const ProtectedRoute = ({ children, allowedRole = null }) => {
   }
 
   // Check role after confirming user is authenticated
-  if (allowedRole && userProfile?.role !== allowedRole) {
-    // User doesn't have the required role
-    if (userProfile?.role) {
-      // Redirect to their correct dashboard
-      return <Navigate to={`/dashboard/${userProfile.role}`} replace />;
-    } else {
-      // No role assigned yet, redirect to role selection
-      const userRole = localStorage.getItem('userRole');
-      if (userRole) {
-        // Has role in localStorage but not synced with backend yet
-        return <Navigate to={`/dashboard/${userRole}`} replace />;
+  if (allowedRole) {
+    // Wait for userProfile to load if it's null/undefined
+    if (!userProfile) {
+      // If we have a role in localStorage that matches the allowed role, allow access
+      const localRole = localStorage.getItem('userRole');
+      if (localRole === allowedRole) {
+        return children;
+      } else if (localRole && localRole !== allowedRole) {
+        // User has a different role in localStorage, redirect to their dashboard
+        return <Navigate to={`/dashboard/${localRole}`} replace />;
+      } else {
+        // No role found anywhere, redirect to role selection
+        return <Navigate to="/get-started" replace />;
       }
-      return <Navigate to="/get-started" replace />;
+    }
+    
+    // userProfile is loaded, now check the role
+    if (userProfile.role && userProfile.role !== allowedRole) {
+      // User doesn't have the required role
+      if (userProfile.role) {
+        // Redirect to their correct dashboard
+        return <Navigate to={`/dashboard/${userProfile.role}`} replace />;
+      } else {
+        // No role assigned yet, redirect to role selection
+        const userRole = localStorage.getItem('userRole');
+        if (userRole) {
+          // Has role in localStorage but not synced with backend yet
+          return <Navigate to={`/dashboard/${userRole}`} replace />;
+        }
+        return <Navigate to="/get-started" replace />;
+      }
     }
   }
 
