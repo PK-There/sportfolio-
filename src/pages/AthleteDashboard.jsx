@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import VoiceInput from '../components/VoiceInput';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const StatCard = ({ label, value, trend, icon }) => (
     <div style={{
@@ -19,8 +21,12 @@ const StatCard = ({ label, value, trend, icon }) => (
 
 const AthleteDashboard = () => {
     const { userProfile, currentUser } = useAuth();
+    const { t } = useLanguage();
     const [activeTab, setActiveTab] = useState('overview');
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [textInput, setTextInput] = useState('');
+    const [aiResponse, setAiResponse] = useState('');
+    const [loading, setLoading] = useState(false);
     const [profileData, setProfileData] = useState({
         fullName: '',
         email: '',
@@ -74,6 +80,40 @@ const AthleteDashboard = () => {
         }
     }, [userProfile, currentUser]);
 
+    const handleGetAIResponse = async () => {
+        if (!textInput.trim()) return;
+        
+        setLoading(true);
+        setAiResponse('');
+        
+        try {
+            // In a real implementation, you would call an AI service here
+            // For now, we'll simulate a response
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // This is a placeholder - in a real implementation, you would call your AI API
+            const mockResponse = `I understand you're asking about: "${textInput}". 
+
+As an AI assistant, I can provide guidance on training plans, injury prevention, career guidance, and profile optimization. 
+
+For personalized advice, please consider consulting with a professional in your specific sport.`;
+            
+            setAiResponse(mockResponse);
+        } catch (error) {
+            console.error('Error getting AI response:', error);
+            setAiResponse('Sorry, there was an error processing your request. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Add Enter key support for textarea
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+            handleGetAIResponse();
+        }
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProfileData(prev => ({ ...prev, [name]: value }));
@@ -98,11 +138,17 @@ const AthleteDashboard = () => {
         console.log('Profile saved:', profileData);
         setIsProfileOpen(false);
     };
+    const handleVoiceTranscript = (transcript) => {
+        console.log('Voice transcript received:', transcript);
+        // Here you can implement logic to process the voice command
+        // For example, you could send it to an AI assistant or use it to update profile fields
+    };
+
     return (
         <div>
             <header style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Hello, {profileData.fullName || 'User'}</h1>
+                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{t('hello')}, {profileData.fullName || 'User'}</h1>
                     <p style={{ color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>🏸 {profileData.sport}</span>
                         <span>•</span>
@@ -112,9 +158,9 @@ const AthleteDashboard = () => {
                     </p>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button className="btn-secondary" onClick={() => setIsProfileOpen(true)}>✏️ Edit Profile</button>
+                    <button className="btn-secondary" onClick={() => setIsProfileOpen(true)}>✏️ {t('editProfile')}</button>
                     <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span>🤖</span> AI Assistant
+                        <span>🤖</span> {t('aiAssistant')}
                     </button>
                 </div>
             </header>
@@ -128,12 +174,12 @@ const AthleteDashboard = () => {
                 overflowX: 'auto'
             }}>
                 {[
-                    { id: 'overview', label: 'Overview', icon: '📊' },
-                    { id: 'opportunities', label: 'Opportunities', icon: '🎯' },
-                    { id: 'connections', label: 'Network', icon: '👥' },
-                    { id: 'coaches', label: 'Coaches', icon: '🎓' },
-                    { id: 'stats', label: 'Stats & Videos', icon: '📈' },
-                    { id: 'ai-insights', label: 'AI Insights', icon: '🤖' }
+                    { id: 'overview', label: t('overview'), icon: '📊' },
+                    { id: 'opportunities', label: t('opportunities'), icon: '🎯' },
+                    { id: 'connections', label: t('network'), icon: '👥' },
+                    { id: 'coaches', label: t('coaches'), icon: '🎓' },
+                    { id: 'stats', label: t('statsVideos'), icon: '📈' },
+                    { id: 'ai-insights', label: t('aiInsights'), icon: '🤖' }
                 ].map(tab => (
                     <button
                         key={tab.id}
@@ -442,8 +488,16 @@ const AthleteDashboard = () => {
 
                             <div className="feature-card">
                                 <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>💬 Ask AI Anything</h3>
-                                <textarea 
+                                <VoiceInput 
+                                    onTranscript={(transcript) => {
+                                        setTextInput(transcript);
+                                    }}
                                     placeholder="Ask about training plans, injury prevention, career guidance, or profile optimization..."
+                                />
+                                <textarea 
+                                    value={textInput}
+                                    onChange={(e) => setTextInput(e.target.value)}
+                                    placeholder="Or type your question here..."
                                     style={{
                                         width: '100%',
                                         minHeight: '120px',
@@ -454,10 +508,34 @@ const AthleteDashboard = () => {
                                         color: 'var(--text-primary)',
                                         fontSize: '0.9rem',
                                         resize: 'vertical',
-                                        fontFamily: 'inherit'
+                                        fontFamily: 'inherit',
+                                        marginTop: '1rem'
                                     }}
                                 />
-                                <button className="btn-primary" style={{ marginTop: '1rem', width: '100%' }}>Get AI Response</button>
+                                <button 
+                                    className="btn-primary" 
+                                    style={{ marginTop: '1rem', width: '100%' }}
+                                    onClick={handleGetAIResponse}
+                                    disabled={loading || !textInput.trim()}
+                                >
+                                    {loading ? 'Processing...' : 'Get AI Response'}
+                                </button>
+                                {aiResponse && (
+                                    <div style={{
+                                        padding: '1rem',
+                                        background: 'var(--card-bg)',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--border-color)',
+                                        marginTop: '1rem'
+                                    }}>
+                                        <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                            AI Response:
+                                        </div>
+                                        <div style={{ color: 'var(--text-primary)', lineHeight: '1.5' }}>
+                                            {aiResponse}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import LanguageSelector from '../components/LanguageSelector';
 
 const DashboardLayout = ({ theme, toggleTheme }) => {
     const navigate = useNavigate();
@@ -30,8 +31,11 @@ const DashboardLayout = ({ theme, toggleTheme }) => {
                 borderRight: '1px solid var(--border-color)',
                 backgroundColor: 'var(--glass-bg)'
             }}>
-                <div className="logo" style={{ marginBottom: '3rem' }}>
-                    Sport<span className="accent-dot">folio</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
+                    <div className="logo">
+                        Sport<span className="accent-dot">folio</span>
+                    </div>
+                    <LanguageSelector />
                 </div>
 
                 <nav style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

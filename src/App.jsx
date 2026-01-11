@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicLayout from './layouts/PublicLayout';
 import DashboardLayout from './layouts/DashboardLayout';
@@ -59,11 +60,12 @@ function App() {
     };
 
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    {/* Public Routes */}
-                    <Route element={<PublicLayout theme={theme} toggleTheme={toggleTheme} />}>
+        <LanguageProvider>
+            <AuthProvider>
+                <BrowserRouter>
+                    <Routes>
+                        {/* Public Routes */}
+                        <Route element={<PublicLayout theme={theme} toggleTheme={toggleTheme} />}>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/discover" element={<DiscoverPage />} />
                         <Route path="/about" element={<AboutPage />} />
@@ -104,6 +106,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
+            </LanguageProvider>
     );
 }
 

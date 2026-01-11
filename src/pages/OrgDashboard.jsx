@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import VoiceInput from '../components/VoiceInput';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const StatCard = ({ label, value, trend, icon }) => (
     <div style={{
@@ -19,8 +21,12 @@ const StatCard = ({ label, value, trend, icon }) => (
 
 const OrgDashboard = () => {
     const { userProfile, currentUser } = useAuth();
+    const { t } = useLanguage();
     const [activeTab, setActiveTab] = useState('overview');
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [textInput, setTextInput] = useState('');
+    const [aiResponse, setAiResponse] = useState('');
+    const [loading, setLoading] = useState(false);
     const [profileData, setProfileData] = useState({
         orgName: '',
         orgType: 'Multi-Sport Academy',
@@ -73,6 +79,40 @@ const OrgDashboard = () => {
         }
     }, [userProfile, currentUser]);
 
+    const handleGetAIResponse = async () => {
+        if (!textInput.trim()) return;
+        
+        setLoading(true);
+        setAiResponse('');
+        
+        try {
+            // In a real implementation, you would call an AI service here
+            // For now, we'll simulate a response
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // This is a placeholder - in a real implementation, you would call your AI API
+            const mockResponse = `I understand you're asking about: "${textInput}". 
+
+As an AI assistant, I can provide guidance on recruitment strategies, athlete matching, facility management, and profile optimization. 
+
+For personalized advice, please consider consulting with a professional in your specific sport.`;
+            
+            setAiResponse(mockResponse);
+        } catch (error) {
+            console.error('Error getting AI response:', error);
+            setAiResponse('Sorry, there was an error processing your request. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Add Enter key support for textarea
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+            handleGetAIResponse();
+        }
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProfileData(prev => ({ ...prev, [name]: value }));
@@ -104,8 +144,8 @@ const OrgDashboard = () => {
                     </p>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button className="btn-secondary" onClick={() => setIsProfileOpen(true)}>✏️ Edit Profile</button>
-                    <button className="btn-primary">+ Post Opportunity</button>
+                    <button className="btn-secondary" onClick={() => setIsProfileOpen(true)}>✏️ {t('editProfile')}</button>
+                    <button className="btn-primary">+ {t('postOpportunity')}</button>
                 </div>
             </header>
 
@@ -118,12 +158,13 @@ const OrgDashboard = () => {
                 overflowX: 'auto'
             }}>
                 {[
-                    { id: 'overview', label: 'Overview' },
-                    { id: 'scout-athletes', label: 'Scout Athletes' },
-                    { id: 'scout-coaches', label: 'Scout Coaches' },
-                    { id: 'shortlisted', label: 'Shortlisted' },
-                    { id: 'messages', label: 'Messages' },
-                    { id: 'opportunities', label: 'My Opportunities' }
+                    { id: 'overview', label: t('overview') },
+                    { id: 'scout-athletes', label: t('scoutAthletes') },
+                    { id: 'scout-coaches', label: t('scoutCoaches') },
+                    { id: 'shortlisted', label: t('shortlisted') },
+                    { id: 'messages', label: t('messages') },
+                    { id: 'opportunities', label: t('myOpportunities') },
+                    { id: 'ai-insights', label: t('aiAssistant') }
                 ].map(tab => (
                     <button
                         key={tab.id}
@@ -463,6 +504,118 @@ const OrgDashboard = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+            )}
+
+            {/* AI Insights Tab */}
+            {activeTab === 'ai-insights' && (
+                <div>
+                    <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>SportFolio AI Assistant</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+                        <div>
+                            <div className="feature-card" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, rgba(0,150,255,0.05), rgba(0,255,200,0.05))', border: '2px solid var(--accent-primary)' }}>
+                                <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <span>🤖</span> AI Organization Insights
+                                </h3>
+                                <p style={{ fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+                                    Based on your organization profile and recruitment data, here are personalized recommendations:
+                                </p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <div style={{ padding: '1rem', background: 'var(--card-bg)', borderRadius: '8px' }}>
+                                        <h4 style={{ fontSize: '0.95rem', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>📈 Profile Enhancement</h4>
+                                        <p style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>Add 3-5 facility photos and coach credentials to increase athlete applications by 50%. Organizations with complete profiles receive 3x more inquiries.</p>
+                                    </div>
+                                    <div style={{ padding: '1rem', background: 'var(--card-bg)', borderRadius: '8px' }}>
+                                        <h4 style={{ fontSize: '0.95rem', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>🎯 Athlete Matching</h4>
+                                        <p style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>Based on your focus areas, we recommend targeting 15 under-19 badminton players in Maharashtra who match your training programs.</p>
+                                    </div>
+                                    <div style={{ padding: '1rem', background: 'var(--card-bg)', borderRadius: '8px' }}>
+                                        <h4 style={{ fontSize: '0.95rem', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>📋 Opportunity Optimization</h4>
+                                        <p style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>Posting opportunities 2 weeks in advance increases application quality by 40% compared to last-minute postings.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="feature-card">
+                                <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>💬 Ask AI Anything</h3>
+                                <VoiceInput 
+                                    onTranscript={(transcript) => {
+                                        setTextInput(transcript);
+                                    }}
+                                    placeholder="Ask about recruitment strategies, athlete matching, facility management, or profile optimization..."
+                                />
+                                <textarea 
+                                    value={textInput}
+                                    onChange={(e) => setTextInput(e.target.value)}
+                                    placeholder="Or type your question here..."
+                                    style={{
+                                        width: '100%',
+                                        minHeight: '120px',
+                                        padding: '1rem',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--border-color)',
+                                        background: 'var(--bg-secondary)',
+                                        color: 'var(--text-primary)',
+                                        fontSize: '0.9rem',
+                                        resize: 'vertical',
+                                        fontFamily: 'inherit',
+                                        marginTop: '1rem'
+                                    }}
+                                />
+                                <button 
+                                    className="btn-primary" 
+                                    style={{ marginTop: '1rem', width: '100%' }}
+                                    onClick={handleGetAIResponse}
+                                    disabled={loading || !textInput.trim()}
+                                >
+                                    {loading ? 'Processing...' : 'Get AI Response'}
+                                </button>
+                                {aiResponse && (
+                                    <div style={{
+                                        padding: '1rem',
+                                        background: 'var(--card-bg)',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--border-color)',
+                                        marginTop: '1rem'
+                                    }}>
+                                        <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                            AI Response:
+                                        </div>
+                                        <div style={{ color: 'var(--text-primary)', lineHeight: '1.5' }}>
+                                            {aiResponse}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="feature-card" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, rgba(255,77,0,0.1), rgba(255,0,85,0.1))', border: '1px solid var(--accent-primary)' }}>
+                                <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <span>✅</span> AI-Verified Organization
+                                </h3>
+                                <p style={{ fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+                                    Get your organization AI-verified to increase athlete trust by <strong>70%</strong> and application rates!
+                                </p>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                                    <p style={{ marginBottom: '0.5rem' }}>✓ Facility verification</p>
+                                    <p style={{ marginBottom: '0.5rem' }}>✓ Coach credential validation</p>
+                                    <p style={{ marginBottom: '0.5rem' }}>✓ Achievement confirmation</p>
+                                </div>
+                                <button className="btn-primary" style={{ width: '100%' }}>Start Verification</button>
+                            </div>
+
+                            <div className="feature-card">
+                                <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>🎯 Quick Actions</h3>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    <button className="btn-secondary" style={{ width: '100%', textAlign: 'left', padding: '0.75rem 1rem' }}>📊 Analyze Applications</button>
+                                    <button className="btn-secondary" style={{ width: '100%', textAlign: 'left', padding: '0.75rem 1rem' }}>🔍 Find Athletes</button>
+                                    <button className="btn-secondary" style={{ width: '100%', textAlign: 'left', padding: '0.75rem 1rem' }}>📋 Optimize Posts</button>
+                                    <button className="btn-secondary" style={{ width: '100%', textAlign: 'left', padding: '0.75rem 1rem' }}>🎓 Strategy Advice</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

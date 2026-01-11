@@ -1,9 +1,11 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const AboutPage = () => {
+    const { t } = useLanguage();
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '10rem 2rem' }}>
-            <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>Built for Privacy. <br />Powered by Progress.</h1>
+            <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>{t('builtForPrivacy')}<br />{t('poweredByProgress') || 'Built for Privacy. Powered by Progress.'}</h1>
 
             <div style={{ marginBottom: '4rem' }}>
                 <p style={{ fontSize: '1.25rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '2rem' }}>

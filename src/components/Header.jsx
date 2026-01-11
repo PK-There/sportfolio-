@@ -1,6 +1,7 @@
 
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import LanguageSelector from './LanguageSelector';
 
 const Header = ({ theme, toggleTheme }) => {
     const location = useLocation();
@@ -61,6 +62,7 @@ const Header = ({ theme, toggleTheme }) => {
                     </li>
                 </ul>
                 <div className="header-actions">
+                    <LanguageSelector />
                     <button
                         className="theme-toggle"
                         onClick={toggleTheme}

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
 
 const LandingPage = () => {
+    const { t } = useLanguage();
     return (
         <div className="landing-page">
             <Hero />

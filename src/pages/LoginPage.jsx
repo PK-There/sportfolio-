@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const LoginPage = () => {
     const [searchParams] = useSearchParams();
+    const { t } = useLanguage();
     const roleParam = searchParams.get('role');
     const [role, setRole] = useState(roleParam || 'athlete');
     const navigate = useNavigate();
@@ -114,7 +116,7 @@ const LoginPage = () => {
                 border: '1px solid var(--border-color)'
             }}>
                 <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                    {isSignup ? 'Create Account' : 'Welcome Back'}
+                    {isSignup ? t('createAccount') : t('welcomeBack') || (isSignup ? 'Create Account' : 'Welcome Back')}
                 </h2>
                 
                 {error && (
@@ -133,7 +135,7 @@ const LoginPage = () => {
 
                 <form onSubmit={handleSubmit}>
                     <div style={{ marginBottom: '2.5rem' }}>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>I am a...</label>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>{t('iAmA') || 'I am a...'}</label>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.5rem' }}>
                             <button
                                 type="button"
@@ -151,7 +153,7 @@ const LoginPage = () => {
                                     opacity: roleParam && role !== 'athlete' ? 0.5 : 1
                                 }}
                             >
-                                Athlete {roleParam === 'athlete' && '🔒'}
+                                {t('athlete')} {roleParam === 'athlete' && '🔒'}
                             </button>
                             <button
                                 type="button"
@@ -169,7 +171,7 @@ const LoginPage = () => {
                                     opacity: roleParam && role !== 'coach' ? 0.5 : 1
                                 }}
                             >
-                                Coach {roleParam === 'coach' && '🔒'}
+                                {t('coach')} {roleParam === 'coach' && '🔒'}
                             </button>
                             <button
                                 type="button"
@@ -187,7 +189,7 @@ const LoginPage = () => {
                                     opacity: roleParam && role !== 'org' ? 0.5 : 1
                                 }}
                             >
-                                Organization {roleParam === 'org' && '🔒'}
+                                {t('organization')} {roleParam === 'org' && '🔒'}
                             </button>
                         </div>
                         {roleParam && (
@@ -204,12 +206,12 @@ const LoginPage = () => {
 
                     {isSignup && (
                         <div style={{ marginBottom: '1rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem' }}>Name</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem' }}>{t('fullName')}</label>
                             <input
                                 type="text"
                                 value={displayName}
                                 onChange={(e) => setDisplayName(e.target.value)}
-                                placeholder="Your name"
+                                placeholder={t('yourName') || 'Your name'}
                                 required={isSignup}
                                 style={{
                                     width: '100%',
@@ -224,7 +226,7 @@ const LoginPage = () => {
                     )}
                     
                     <div style={{ marginBottom: '1rem' }}>
-                        <label style={{ display: 'block', marginBottom: '0.5rem' }}>Email</label>
+                        <label style={{ display: 'block', marginBottom: '0.5rem' }}>{t('email')}</label>
                         <input
                             type="email"
                             value={email}
@@ -243,7 +245,7 @@ const LoginPage = () => {
                     </div>
 
                     <div style={{ marginBottom: '1.5rem' }}>
-                        <label style={{ display: 'block', marginBottom: '0.5rem' }}>Password</label>
+                        <label style={{ display: 'block', marginBottom: '0.5rem' }}>{t('password') || 'Password'}</label>
                         <input
                             type="password"
                             value={password}
@@ -268,7 +270,7 @@ const LoginPage = () => {
                         style={{ width: '100%', marginBottom: '1rem' }}
                         disabled={loading}
                     >
-                        {loading ? 'Processing...' : (isSignup ? 'Sign Up' : 'Login')}
+                        {loading ? (t('processing') || 'Processing...') : (isSignup ? (t('signUp') || 'Sign Up') : (t('login') || 'Login'))}
                     </button>
                     
                     <button
@@ -297,7 +299,7 @@ const LoginPage = () => {
                             <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07Z"/>
                             <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3Z"/>
                         </svg>
-                        Continue with Google
+                        {t('continueWithGoogle') || 'Continue with Google'}
                     </button>
                     
                     <div style={{ textAlign: 'center', marginTop: '1rem' }}>
@@ -316,7 +318,7 @@ const LoginPage = () => {
                                 textDecoration: 'underline'
                             }}
                         >
-                            {isSignup ? 'Already have an account? Login' : "Don't have an account? Sign up"}
+                            {isSignup ? (t('alreadyHaveAccount') || 'Already have an account? Login') : (t('dontHaveAccount') || "Don't have an account? Sign up")}
                         </button>
                     </div>
                 </form>
