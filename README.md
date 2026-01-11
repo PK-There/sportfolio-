@@ -84,3 +84,58 @@ Backend (Node.js + Express)
         |  Verified Requests
         v
 MongoDB Atlas
+
+
+## Getting Started
+## Prerequisites
+
+Node.js (v18 or higher recommended)
+
+npm or yarn
+
+Installation
+git clone https://github.com/your-username/sportfolio.git
+cd sportfolio
+npm install
+
+Run Development Server
+npm run dev
+
+
+Application will be available at:
+
+http://localhost:5173
+
+
+Impact & Use Cases
+
+Grassroots athlete empowerment
+
+Fair and data-driven talent discovery
+
+Increased accessibility through multilingual support
+
+Reduction of geographical and economic barriers in sports scouting
+
+Future Scope
+
+Advanced pose estimation across multiple joints
+
+Real-time video-based feedback
+
+Mobile application support
+
+Integration with sports federations and training academies
+
+Analytics dashboards for scouts and organizations
+
+Team
+
+Prathamesh Khaire — Full Stack Development & AI Integration
+Osman Sanjar - Database Integration 
+Parth Kumar Jat - UI Design 
+Sanskriti Singh - Frontend 
+
+License
+
+This project is licensed under the MIT License.
