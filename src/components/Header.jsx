@@ -1,9 +1,19 @@
 
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = ({ theme, toggleTheme }) => {
     const location = useLocation();
+    const { currentUser, logout } = useAuth();
     const isLoginPage = location.pathname === '/login' || location.pathname === '/get-started';
+    
+    const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    };
     
     return (
         <header className="glass-header">
@@ -65,7 +75,22 @@ const Header = ({ theme, toggleTheme }) => {
                         )}
                     </button>
                     {!isLoginPage && (
-                        <Link to="/login" className="btn-primary">Login / Signup</Link>
+                        currentUser ? (
+                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                    {currentUser.email}
+                                </span>
+                                <button 
+                                    onClick={handleLogout}
+                                    className="btn-primary"
+                                    style={{ padding: '0.5rem 1rem' }}
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <Link to="/login" className="btn-primary">Login / Signup</Link>
+                        )
                     )}
                 </div>
             </nav>

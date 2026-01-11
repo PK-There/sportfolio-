@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import PublicLayout from './layouts/PublicLayout';
 import DashboardLayout from './layouts/DashboardLayout';
 import LandingPage from './pages/LandingPage';
@@ -57,40 +59,51 @@ function App() {
     };
 
     return (
-        <BrowserRouter>
-            <Routes>
-                {/* Public Routes */}
-                <Route element={<PublicLayout theme={theme} toggleTheme={toggleTheme} />}>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/discover" element={<DiscoverPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                </Route>
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    {/* Public Routes */}
+                    <Route element={<PublicLayout theme={theme} toggleTheme={toggleTheme} />}>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/discover" element={<DiscoverPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                    </Route>
 
-                {/* Role Selection Page (No Layout) */}
-                <Route path="/get-started" element={<RoleSelectionPage />} />
+                    {/* Role Selection Page (Public - No Auth Required) */}
+                    <Route path="/get-started" element={<RoleSelectionPage />} />
 
-                {/* Dashboard Routes (Protected in real app) */}
-                <Route path="/dashboard" element={<DashboardLayout theme={theme} toggleTheme={toggleTheme} />}>
-                    <Route index element={<DashboardRedirect />} />
-                    <Route path="athlete" element={
-                        <ProtectedDashboard allowedRole="athlete">
-                            <AthleteDashboard />
-                        </ProtectedDashboard>
-                    } />
-                    <Route path="coach" element={
-                        <ProtectedDashboard allowedRole="coach">
-                            <CoachDashboard />
-                        </ProtectedDashboard>
-                    } />
-                    <Route path="org" element={
-                        <ProtectedDashboard allowedRole="org">
-                            <OrgDashboard />
-                        </ProtectedDashboard>
-                    } />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                    {/* Dashboard Routes (Protected) */}
+                    <Route path="/dashboard" element={<DashboardLayout theme={theme} toggleTheme={toggleTheme} />}>
+                        <Route index element={<DashboardRedirect />} />
+                        <Route 
+                            path="athlete" 
+                            element={
+                                <ProtectedRoute allowedRole="athlete">
+                                    <AthleteDashboard />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route 
+                            path="coach" 
+                            element={
+                                <ProtectedRoute allowedRole="coach">
+                                    <CoachDashboard />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route 
+                            path="org" 
+                            element={
+                                <ProtectedRoute allowedRole="org">
+                                    <OrgDashboard />
+                                </ProtectedRoute>
+                            } 
+                        />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     );
 }
 

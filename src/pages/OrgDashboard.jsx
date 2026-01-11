@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 const StatCard = ({ label, value, trend, icon }) => (
     <div style={{
@@ -17,14 +18,15 @@ const StatCard = ({ label, value, trend, icon }) => (
 );
 
 const OrgDashboard = () => {
+    const { userProfile, currentUser } = useAuth();
     const [activeTab, setActiveTab] = useState('overview');
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [profileData, setProfileData] = useState({
-        orgName: 'Pune Sports Academy',
+        orgName: '',
         orgType: 'Multi-Sport Academy',
         location: 'Pune, Maharashtra',
         established: '2010',
-        email: 'info@punesportsacademy.com',
+        email: '',
         phone: '',
         website: '',
         description: '',
@@ -44,6 +46,32 @@ const OrgDashboard = () => {
 
         return () => clearTimeout(timer);
     }, []);
+
+    // Update profile data when user profile is loaded
+    useEffect(() => {
+        if (userProfile) {
+            setProfileData({
+                orgName: userProfile.displayName || userProfile.profile?.orgName || 
+                         (currentUser?.displayName ? `${currentUser.displayName.split(' ')[0]}'Organization` : 'Hey User'),
+                orgType: userProfile.profile?.orgType || 'Multi-Sport Academy',
+                location: userProfile.profile?.location || 'Pune, Maharashtra',
+                established: userProfile.profile?.established || '2010',
+                email: userProfile.email || currentUser?.email || '',
+                phone: userProfile.profile?.phone || '',
+                website: userProfile.profile?.website || '',
+                description: userProfile.profile?.description || '',
+                facilities: userProfile.profile?.facilities || '',
+                achievements: userProfile.profile?.achievements || ''
+            });
+        } else if (currentUser) {
+            // Set initial values from Firebase user object
+            setProfileData(prev => ({
+                ...prev,
+                orgName: currentUser.displayName ? `Hey ${currentUser.displayName.split(' ')[0]}'s Organization` : 'Hey User',
+                email: currentUser.email || ''
+            }));
+        }
+    }, [userProfile, currentUser]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -66,7 +94,7 @@ const OrgDashboard = () => {
         <div>
             <header style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{profileData.orgName}</h1>
+                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{profileData.orgName || 'Organization'}</h1>
                     <p style={{ color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>🏛️ {profileData.orgType}</span>
                         <span>•</span>

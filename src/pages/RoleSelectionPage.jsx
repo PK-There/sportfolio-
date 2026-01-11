@@ -7,6 +7,7 @@ const RoleSelectionPage = () => {
     const handleRoleLogin = (role) => {
         // Scroll to top first
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
         // Small delay to ensure smooth scroll completes before navigation
         setTimeout(() => {
             navigate(`/login?role=${role}`);

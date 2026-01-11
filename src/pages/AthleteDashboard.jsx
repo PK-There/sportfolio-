@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 const StatCard = ({ label, value, trend, icon }) => (
     <div style={{
@@ -17,11 +18,12 @@ const StatCard = ({ label, value, trend, icon }) => (
 );
 
 const AthleteDashboard = () => {
+    const { userProfile, currentUser } = useAuth();
     const [activeTab, setActiveTab] = useState('overview');
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [profileData, setProfileData] = useState({
-        fullName: 'Rahul Kumar',
-        email: 'rahul@example.com',
+        fullName: '',
+        email: '',
         phone: '',
         dateOfBirth: '',
         gender: '',
@@ -44,6 +46,33 @@ const AthleteDashboard = () => {
         // Cleanup timer on unmount
         return () => clearTimeout(timer);
     }, []);
+
+    // Update profile data when user profile is loaded
+    useEffect(() => {
+        if (userProfile) {
+            setProfileData({
+                fullName: userProfile.displayName || userProfile.profile?.fullName || 
+                         (currentUser?.displayName ? `${currentUser.displayName.split(' ')[0]}` : 'User'),
+                email: userProfile.email || currentUser?.email || '',
+                phone: userProfile.profile?.phone || '',
+                dateOfBirth: userProfile.profile?.dateOfBirth || '',
+                gender: userProfile.profile?.gender || '',
+                sport: userProfile.profile?.sport || 'Badminton',
+                category: userProfile.profile?.category || 'Under-19',
+                location: userProfile.profile?.location || 'Pune',
+                aadharNumber: userProfile.profile?.aadharNumber || '',
+                achievements: userProfile.profile?.achievements || '',
+                bio: userProfile.profile?.bio || ''
+            });
+        } else if (currentUser) {
+            // Set initial values from Firebase user object
+            setProfileData(prev => ({
+                ...prev,
+                fullName: currentUser.displayName ? `Hey ${currentUser.displayName.split(' ')[0]}` : 'Hey User',
+                email: currentUser.email || ''
+            }));
+        }
+    }, [userProfile, currentUser]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -73,7 +102,7 @@ const AthleteDashboard = () => {
         <div>
             <header style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Hello, {profileData.fullName}</h1>
+                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Hello, {profileData.fullName || 'User'}</h1>
                     <p style={{ color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>🏸 {profileData.sport}</span>
                         <span>•</span>
