@@ -175,6 +175,35 @@ const translations = {
     removeFromShortlist: 'हटाएं',
     manage: 'प्रबंधित करें',
     edit: 'संपादित करें',
+    
+    // Login Page
+    createAccount: 'खाता बनाएं',
+    welcomeBack: 'वापसी पर स्वागत है',
+    iAmA: 'मैं हूं...',
+    yourName: 'आपका नाम',
+    password: 'पासवर्ड',
+    processing: 'प्रसंस्करण...',
+    signUp: 'साइन अप करें',
+    login: 'लॉगिन करें',
+    continueWithGoogle: 'Google के साथ जारी रखें',
+    alreadyHaveAccount: 'पहले से खाता है? लॉगिन करें',
+    dontHaveAccount: 'खाता नहीं है? साइन अप करें',
+    athlete: 'एथलीट',
+    coach: 'कोच',
+    organization: 'संगठन',
+    
+    // Discover Page
+    findScholarships: 'आपके लिए बनाए गए छात्रवृत्ति, परीक्षण और प्रतियोगिताएं खोजें।',
+    scholarships: 'छात्रवृत्ति',
+    tournaments: 'प्रतियोगिता',
+    trials: 'परीक्षण',
+    dontMissOpportunities: 'अवसरों से चूकें नहीं',
+    createAccountToSave: 'अवसरों को सहेजने और सीधे आवेदन करने के लिए एक खाता बनाएं।',
+    createFreeAccount: 'निःशुल्क खाता बनाएं',
+    
+    // About Page
+    builtForPrivacy: 'गोपनीयता के लिए निर्मित।',
+    poweredByProgress: 'प्रगति द्वारा संचालित।',
   },
   mr: {
     // Navigation
@@ -248,6 +277,35 @@ const translations = {
     removeFromShortlist: 'काढा',
     manage: 'व्यवस्थापन',
     edit: 'संपादित करा',
+    
+    // Login Page
+    createAccount: 'खाते तयार करा',
+    welcomeBack: 'परत येण्यास स्वागत आहे',
+    iAmA: 'मी आहे...',
+    yourName: 'तुमचे नाव',
+    password: 'पासवर्ड',
+    processing: 'प्रक्रिया सुरू आहे...',
+    signUp: 'साइन अप करा',
+    login: 'लॉगिन करा',
+    continueWithGoogle: 'गूगल सह सुरू ठेवा',
+    alreadyHaveAccount: 'आधीपासूनच खाते आहे? लॉगिन करा',
+    dontHaveAccount: 'खाते नाही? साइन अप करा',
+    athlete: 'एथलीट',
+    coach: 'प्रशिक्षक',
+    organization: 'संस्था',
+    
+    // Discover Page
+    findScholarships: 'तुमच्यासाठी निर्माण केलेले शिष्यवृत्ती, चाचणी आणि स्पर्धा शोधा.',
+    scholarships: 'शिष्यवृत्ती',
+    tournaments: 'स्पर्धा',
+    trials: 'चाचणी',
+    dontMissOpportunities: 'संधी सोडू नका',
+    createAccountToSave: 'संधी जतन करण्यासाठी आणि थेट अर्ज करण्यासाठी एक खाते तयार करा.',
+    createFreeAccount: 'विनामूल्य खाते तयार करा',
+    
+    // About Page
+    builtForPrivacy: 'गोपनीयतेसाठी निर्माण केलेले.',
+    poweredByProgress: 'प्रगतीने समर्थित.',
   }
 };
 
