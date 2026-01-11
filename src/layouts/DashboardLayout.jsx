@@ -1,10 +1,23 @@
-import React from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import LanguageSelector from '../components/LanguageSelector';
 
 const DashboardLayout = ({ theme, toggleTheme }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { currentUser, userProfile, loading } = useAuth();
     const userRole = localStorage.getItem('userRole');
+    
+    useEffect(() => {
+        // If user is not authenticated or doesn't have a role, redirect to login
+        if (!currentUser && !loading) {
+            navigate('/login');
+        } else if (currentUser && !userRole) {
+            // User is logged in but doesn't have a role set, redirect to role selection
+            navigate('/get-started');
+        }
+    }, [currentUser, userRole, loading, navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem('userRole');

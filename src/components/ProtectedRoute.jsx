@@ -20,11 +20,12 @@ const ProtectedRoute = ({ children, allowedRole = null }) => {
     );
   }
 
+  // If no currentUser, always redirect to login regardless of loading state
   if (!currentUser) {
-    // Not logged in, redirect to login
     return <Navigate to="/login" replace />;
   }
 
+  // Check role after confirming user is authenticated
   if (allowedRole && userProfile?.role !== allowedRole) {
     // User doesn't have the required role
     if (userProfile?.role) {
