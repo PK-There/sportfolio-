@@ -54,7 +54,7 @@ The system is built with a focus on accessibility, scalability, and real-world a
 
 ## Technology Stack
 
-### Frontend
+Frontend
 - React (Vite)
 - Tailwind CSS
 - JavaScript (ES6+)
