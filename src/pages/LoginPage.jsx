@@ -9,7 +9,7 @@ const LoginPage = () => {
     const roleParam = searchParams.get('role');
     const [role, setRole] = useState(roleParam || 'athlete');
     const navigate = useNavigate();
-    const { login, loginWithGoogle, signup, currentUser, updateUserRole, error: authError } = useAuth();
+    const { login, loginWithGoogle, signup, currentUser, updateUserRole, syncUserWithBackend, error: authError } = useAuth();
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -91,9 +91,17 @@ const LoginPage = () => {
                 }
             }
             
+            // Get the user role from localStorage (should be set by loginWithGoogle via syncUserWithBackend)
+            let userRole = localStorage.getItem('userRole');
+            
+            // If role is not in localStorage but was selected via URL param, use that
+            if (!userRole && role) {
+                userRole = role;
+            }
+            
             // Navigate to appropriate page
-            if (role) {
-                navigate(`/dashboard/${role}`);
+            if (userRole) {
+                navigate(`/dashboard/${userRole}`);
             } else {
                 navigate('/get-started');
             }
