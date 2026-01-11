@@ -54,13 +54,13 @@ The system is built with a focus on accessibility, scalability, and real-world a
 
 ## Technology Stack
 
-Frontend
+###Frontend
 - React (Vite)
 - Tailwind CSS
 - JavaScript (ES6+)
 
 ### Backend
-- Node.js
+- Flask / Node.js
 - Express.js
 - Firebase Admin SDK
 - MongoDB Atlas
@@ -78,7 +78,7 @@ Frontend (React + Vite)
         |
         |  Firebase ID Token
         v
-Backend (Node.js + Express)
+Backend (Node.js/Flask + Express)
         |
         |  Verified Requests
         v
@@ -105,7 +105,7 @@ http://localhost:5173
 
 ---
 
-###Impact & Use Cases
+Impact & Use Cases
 
 -Grassroots athlete empowerment
 -Fair and data-driven talent discovery
@@ -114,7 +114,7 @@ http://localhost:5173
 
 ---
 
-###Future Scope
+Future Scope
 
 -Advanced pose estimation across multiple joints
 -Real-time video-based feedback
@@ -124,7 +124,7 @@ http://localhost:5173
 
 ---
 
-###Team
+Team
 
 -Prathamesh Khaire — Full Stack Development & AI Integration
 -Osman Sanjar - Database Integration 
@@ -133,6 +133,6 @@ http://localhost:5173
 
 ---
 
-###License
+License
 
 This project is licensed under the MIT License.
